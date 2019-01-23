@@ -5,13 +5,14 @@
     Dim Rides As Integer = 3
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
-    Dim Data(6, 5) As Integer
+    Dim Data(4, 5) As Integer
     Sub Main()
         FileReading()
-        For i = 0 To 5
-            For j = 0 To 4
-                Console.WriteLine(Data(i, j) & " ")
+        For i = 0 To 4
+            For j = 0 To 5
+                Console.Write(Data(i, j) & " ")
             Next
+            Console.WriteLine()
         Next
         Console.ReadLine()
     End Sub
@@ -28,12 +29,18 @@
             FileLine = fileReader.ReadLine()
             Console.WriteLine(FileLine)
             LastSpace = 0
+            CounterNums = 0
             For i = 1 To Len(FileLine)
                 If Mid(FileLine, i, 1) = " " Then
                     NumTaken = CInt(Mid(FileLine, LastSpace + 1, i - LastSpace))
                     LastSpace = i
                     Data(Counterj, CounterNums) = NumTaken
                     CounterNums = CounterNums + 1
+                    Console.WriteLine(CounterNums)
+                End If
+                If i = Len(FileLine) Then
+                    NumTaken = CInt(Right(FileLine, i - LastSpace))
+                    Data(Counterj, CounterNums) = NumTaken
                 End If
             Next
             Counterj = Counterj + 1
