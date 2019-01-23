@@ -5,7 +5,7 @@
     Dim Rides As Integer = 3
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
-    Dim Data(5, 4) As Integer
+    Dim Data(6, 5) As Integer
     Sub Main()
         FileReading()
         For i = 0 To 5
@@ -22,14 +22,15 @@
         Dim NumTaken As Integer = 0
         Dim Counterj As Integer = 0
         Dim CounterNums As Integer = 0
-        fileReader = New IO.StreamReader("a_example.in")
+        fileReader = New IO.StreamReader("a_example1.txt")
         fileReader.ReadLine()
         Do While fileReader.EndOfStream = False
             FileLine = fileReader.ReadLine()
+            Console.WriteLine(FileLine)
+            LastSpace = 0
             For i = 1 To Len(FileLine)
-                LastSpace = 0
                 If Mid(FileLine, i, 1) = " " Then
-                    NumTaken = CInt(Mid(FileLine, LastSpace + 1, i - LastSpace - 1))
+                    NumTaken = CInt(Mid(FileLine, LastSpace + 1, i - LastSpace))
                     LastSpace = i
                     Data(Counterj, CounterNums) = NumTaken
                     CounterNums = CounterNums + 1
