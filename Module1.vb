@@ -6,7 +6,7 @@
     Dim Rides As Integer = 3
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
-    Dim Data(2, 5) As Integer
+    Dim Data(3, 6) As Integer
     Sub Main()
         FileReading()
         For i = 0 To 2
@@ -43,9 +43,8 @@
                     LastSpace = i
                     Data(Counterj, CounterNums) = NumTaken
                     CounterNums = CounterNums + 1
-                    Console.WriteLine(CounterNums)
                 End If
-                If i = Len(FileLine) Then
+                 If i = Len(FileLine) Then
                     NumTaken = CInt(Right(FileLine, i - LastSpace))
                     Data(Counterj, CounterNums) = NumTaken
                 End If
