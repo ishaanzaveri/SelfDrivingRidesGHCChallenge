@@ -29,7 +29,7 @@
         Dim NumTaken As Integer = 0
         Dim Counterj As Integer = 0
         Dim CounterNums As Integer = 0
-        fileReader = New IO.StreamReader("a_example1.txt")
+        fileReader = New IO.StreamReader("a_example.in")
         fileReader.ReadLine()
 
         Do While fileReader.EndOfStream = False
