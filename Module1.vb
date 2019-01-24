@@ -44,7 +44,7 @@
                     Data(Counterj, CounterNums) = NumTaken
                     CounterNums = CounterNums + 1
                 End If
-                 If i = Len(FileLine) Then
+                If i = Len(FileLine) Then
                     NumTaken = CInt(Right(FileLine, i - LastSpace))
                     Data(Counterj, CounterNums) = NumTaken
                 End If
