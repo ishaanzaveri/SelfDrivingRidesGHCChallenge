@@ -17,6 +17,11 @@
         Next
         Console.ReadLine()
     End Sub
+    Function Distance(ByVal cordx1 As Integer, ByVal cordy1 As Integer, ByVal cordx2 As Integer, ByVal cordy2 As Integer) As Integer
+        Dim Dis As Integer = 0
+        Dis = Math.Abs(cordx1 - cordx2) + Math.Abs(cordy1 - cordy2)
+        Return Dis
+    End Function
     Sub FileReading()
         Dim FileLine As String = ""
         Dim fileReader As IO.StreamReader
