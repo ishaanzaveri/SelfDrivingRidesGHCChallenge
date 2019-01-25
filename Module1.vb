@@ -6,14 +6,11 @@
     Dim Rides As Integer = 3
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
-<<<<<<< HEAD
-    Dim Data(3, 6) As Integer
-=======
-    Dim Data(4, 5) As Integer
->>>>>>> parent of cf090e8... final file handeling
+    Dim Data(2, 5) As Integer
+
     Sub Main()
         FileReading()
-        For i = 0 To 4
+        For i = 0 To 2
             For j = 0 To 5
                 Console.Write(Data(i, j) & " ")
             Next
@@ -37,7 +34,7 @@
         fileReader.ReadLine()
         Do While fileReader.EndOfStream = False
             FileLine = fileReader.ReadLine()
-            Console.WriteLine(FileLine)
+            'Console.WriteLine(FileLine)
             LastSpace = 0
             CounterNums = 0
             For i = 1 To Len(FileLine)
