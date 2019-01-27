@@ -1,6 +1,5 @@
 ﻿Module Module1
     'rayhaan is in
-    'RidesNearby(cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
     Dim rows As Integer = 3
     Dim Cols As Integer = 4
     Dim Vehicles As Integer = 2
