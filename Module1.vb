@@ -1,6 +1,8 @@
 ﻿Module Module1
     'rayhaan is in
-    'RidesNearby(cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
+    'Function RidesNearby(cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
+    'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
+    'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
     Dim rows As Integer = 3
     Dim Cols As Integer = 4
     Dim Vehicles As Integer = 2
@@ -8,8 +10,9 @@
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
     Dim DataIN(2, 7) As Integer
-    Dim DataCar(3, 1000) As Integer
+    Dim DataCar(1, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
+    'Dim RidesAvailable( As Integer
 
     Sub Main()
         FileReading()
