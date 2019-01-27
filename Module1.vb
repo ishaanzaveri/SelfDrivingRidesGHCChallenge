@@ -7,6 +7,8 @@
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
     Dim DataIN(2, 5) As Integer
+    Dim DataCar(3, 1000) As Integer
+    Dim PlusMinus As Integer = (rows * Cols) * 0.15
 
     Sub Main()
         FileReading()
