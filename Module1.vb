@@ -62,16 +62,23 @@
         Loop
 
     End Sub
-    Function RidesAvailable(ByVal cordx As Integer, ByVal cordy As Integer) As Integer(,)
+    Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer(,)
         Dim Rides(99, 2) As Integer
         ' FirstLine number of close rides
+        Dim RideNO(99) As Integer
+
+        Dim rideCounter = 0
+        For i = 0 To Vehicles - 1
+            If DataIN(i, 0) >= SearchAtrributex - PlusMinus And DataIN(i, 1) <= SearchAtrributex + PlusMinus And DataIN(i, 7) = 0 Then
+                If DataIN(i, 1) >= SearchAtrributey - PlusMinus And DataIN(i, 2) <= SearchAtrributey + PlusMinus And DataIN(i, 7) = 0 Then
+                    RideNO(rideCounter) = i
+                    rideCounter = rideCounter + 1
+                End If
+            End If
+        Next
+
+
         RidesAvailable = Rides
-    End Function
-    Function LinSearch(ByVal SearchAtrribute As Integer, ByVal DataIN(,) As Integer, ByVal ColNo As Integer) As Integer
-        Dim RideNO As Integer
-
-
-        LinSearch = RideNO
     End Function
 
 End Module
