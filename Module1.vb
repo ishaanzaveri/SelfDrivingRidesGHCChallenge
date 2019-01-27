@@ -12,10 +12,14 @@
     Dim DataIN(Rides - 1, 7) As Integer
     Dim DataCar(1, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
-    'Dim RidesAvailable( As Integer)
+    Dim T As Integer = 0
+    Dim sim_step As Integer = -1
 
     Sub Main()
         FileReading()
+        For sim_step = -1 To (DataIN(0, 5) - 1)
+            T = T + 1
+        Next
         For i = 0 To 2
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
