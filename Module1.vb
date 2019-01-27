@@ -6,14 +6,14 @@
     Dim Rides As Integer = 3
     Dim Bonuses As Integer = 2
     Dim Steps As Integer = 10
-    Dim DataIN(2, 6) As Integer
+    Dim DataIN(2, 7) As Integer
     Dim DataCar(3, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
 
     Sub Main()
         FileReading()
         For i = 0 To 2
-            For j = 0 To 6
+            For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
             Console.WriteLine()
@@ -32,6 +32,7 @@
         Dim NumTaken As Integer = 0
         Dim Counterj As Integer = 0
         Dim CounterNums As Integer = 0
+        Dim RideNo As Integer = 0
         fileReader = New IO.StreamReader("a_example.in")
         fileReader.ReadLine()
         Do While fileReader.EndOfStream = False
@@ -51,7 +52,9 @@
                     DataIN(Counterj, CounterNums) = NumTaken
                 End If
             Next
+            DataIN(Counterj, 6) = Counterj
             Counterj = Counterj + 1
+
         Loop
 
     End Sub
