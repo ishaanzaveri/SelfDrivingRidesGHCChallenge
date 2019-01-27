@@ -63,7 +63,7 @@
 
     End Sub
     Function RidesAvailable(ByVal cordx As Integer, ByVal cordy As Integer) As Integer(,)
-        Dim Rides(100, 3) As Integer
+        Dim Rides(99, 2) As Integer
         ' FirstLine number of close rides
         RidesAvailable = Rides
     End Function
