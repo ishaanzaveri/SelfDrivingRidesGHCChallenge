@@ -14,6 +14,8 @@
     Dim DataCar(Rides, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
     Dim T As Integer = 0
+    Dim RidesArr(99) As Integer
+    Dim CurrentPos(Vehicles - 1, 1) As Integer
 
     Sub Main()
         FileReading()
@@ -26,6 +28,10 @@
         Console.ReadLine()
         SortedbyES()
         Console.ReadLine()
+        For T = 1 To Steps
+            'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
+            Decision(RidesArr)
+        Next
     End Sub
 
     Sub SortedbyES()
@@ -85,21 +91,13 @@
             Next
             DataIN(Counterj, 6) = Counterj
             Counterj = Counterj + 1
-
         Loop
 
     End Sub
-<<<<<<< HEAD
 
-    Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer(,)
-        Dim RidesArr(99, 2) As Integer
-=======
     Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer()
         Dim RidesArr(Vehicles) As Integer
->>>>>>> 0632c9d4e342ddd9108464365ae1d46f42ee876d
         ' FirstLine number of close rides
-
-
         Dim rideCounter = 0
         For i = 1 To Rides
             If DataIN(i, 0) >= SearchAtrributex - PlusMinus And DataIN(i, 0) <= SearchAtrributex + PlusMinus And DataIN(i, 7) = 0 Then
@@ -112,6 +110,112 @@
         RidesArr(0) = rideCounter
 
         RidesAvailable = RidesArr
+    End Function
+
+    Sub Decision(ByVal RidesArr)
+        Dim cordx As Integer = 0
+        Dim cordy As Integer = 0
+        Dim Dist As Integer = 0
+        Dim LeastDist As Integer = 0
+        Dim Waiting As Integer = 0
+        Dim LeastWait As Integer = 0
+        Dim iterations As Integer = 0
+        Dim counter1 As Integer = 0
+        Dim counter2 As Integer = 0
+        Dim updatex As Integer = 0
+        Dim updatey As Integer = 0
+        Dim RideNum As Integer = 0
+        Dim temp As String = ""
+        Dim WriteToFile As String = ""
+        Dim FileWriter As IO.StreamWriter
+        Dim FileReader As IO.StreamReader
+        LeastDist = 1000000
+        LeastWait = 1000000
+        For counter = 0 To (Vehicles - 1)
+            cordx = CurrentPos(counter, 0)
+            cordy = CurrentPos(counter, 1)
+            RidesAvailable(cordx, cordy)
+            iterations = RidesArr(0)
+            LeastDist = 1000000
+            LeastWait = 1000000
+            For counter1 = 1 To iterations
+                Dist = Distance(cordx, cordy, RideSearchx(RidesArr(counter1)), RideSearchy(RidesArr(counter1)))
+                Waiting = T - Check_E_Start(RidesArr(counter1))
+                If (Dist < LeastDist) And (Waiting < LeastWait) Then
+                    updatex = RideSearchx(RidesArr(counter1))
+                    updatey = RideSearchy(RidesArr(counter1))
+                    LeastDist = Dist
+                    LeastWait = Waiting
+                    RideNum = RidesArr(counter1)
+                End If
+            Next
+            FileReader = New IO.StreamReader("output_file.txt")
+            For counter2 = 1 To counter
+                FileReader.ReadLine()
+            Next
+            temp = CStr(FileReader.ReadLine())
+            FileReader.Close()
+            'Incomplete code for writing to file below. Need to figure out how to write to a specific line
+            'FileWriter = New IO.StreamWriter("output_file.txt")
+            'WriteToFile = temp & ", " & RideNum
+            'FileWriter.WriteLine(CInt(WriteToFile))
+            'FileWriter.Close()
+            CurrentPos(counter, 0) = 0
+            CurrentPos(counter, 0) = updatex
+            CurrentPos(counter, 1) = 0
+            CurrentPos(counter, 1) = updatey
+            Dist = 0
+            Waiting = 0
+            RideNum = 0
+            cordx = 0
+            cordy = 0
+            updatex = 0
+            updatey = 0
+            temp = ""
+            WriteToFile = ""
+        Next
+    End Sub
+
+    Function RideSearchx(ByVal RideNumber As Integer) As Integer
+        Dim length As Integer = 0
+        Dim cordx As Integer = 0
+        Dim scan_array As Integer = 0
+        length = DataIN(0, 3)
+        'Can change to While Loop to make more efficient
+        For scan_array = 1 To length
+            If DataIN(scan_array, 6) = RideNumber Then
+                cordx = DataIN(scan_array, 2)
+            End If
+        Next
+        RideSearchx = cordx
+    End Function
+
+    Function RideSearchy(ByVal RideNumber As Integer) As Integer
+        Dim length As Integer = 0
+        Dim cordy As Integer = 0
+        Dim scan_array As Integer = 0
+        length = DataIN(0, 3)
+        'Can change to While Loop to make more efficient
+        For scan_array = 1 To length
+            If DataIN(scan_array, 6) = RideNumber Then
+                cordy = DataIN(scan_array, 3)
+            End If
+        Next
+        RideSearchy = cordy
+    End Function
+
+    Function Check_E_Start(ByVal RideNumber As Integer) As Integer
+        Dim length As Integer = 0
+        Dim e_start As Integer = 0
+        Dim scan_array As Integer = 0
+        length = DataIN(0, 3)
+        'Can change to While Loop to make more efficient
+        For scan_array = 1 To length
+            If DataIN(scan_array, 6) = RideNumber Then
+                e_start = DataIN(scan_array, 4)
+            End If
+        Next
+        Check_E_Start = e_start
     End Function
 
 End Module
