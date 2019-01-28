@@ -62,8 +62,8 @@
         Loop
 
     End Sub
-    Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer(,)
-        Dim RidesArr(99, 2) As Integer
+    Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer()
+        Dim RidesArr(Vehicles) As Integer
         ' FirstLine number of close rides
 
 
@@ -71,14 +71,12 @@
         For i = 1 To Rides - 1
             If DataIN(i, 0) >= SearchAtrributex - PlusMinus And DataIN(i, 0) <= SearchAtrributex + PlusMinus And DataIN(i, 7) = 0 Then
                 If DataIN(i, 1) >= SearchAtrributey - PlusMinus And DataIN(i, 1) <= SearchAtrributey + PlusMinus And DataIN(i, 7) = 0 Then
-                    RidesArr(rideCounter, 0) = DataIN(i, 0)
-                    RidesArr(rideCounter, 1) = DataIN(i, 1)
-                    RidesArr(rideCounter, 2) = DataIN(i, 4)
+                    RidesArr(rideCounter) = DataIN(i, 6)
                     rideCounter = rideCounter + 1
                 End If
             End If
         Next
-
+        RidesArr(0) = rideCounter
 
         RidesAvailable = RidesArr
     End Function
