@@ -4,20 +4,20 @@
     'Function RidesAvailble (cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
     'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
     'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
-    Dim rows As Integer = 3
-    Dim Cols As Integer = 4
-    Dim Vehicles As Integer = 2
-    Dim Rides As Integer = 3
-    Dim Bonuses As Integer = 2
-    Dim Steps As Integer = 10
-    Dim DataIN(Rides - 1, 7) As Integer
-    Dim DataCar(1, 1000) As Integer
+    Dim rows As Integer = 799
+    Dim Cols As Integer = 997
+    Dim Vehicles As Integer = 100
+    Dim Rides As Integer = 299
+    Dim Bonuses As Integer = 25
+    Dim Steps As Integer = 25000
+    Dim DataIN(Rides, 7) As Integer
+    Dim DataCar(Rides, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
     Dim T As Integer = 0
 
     Sub Main()
         FileReading()
-        For i = 0 To 2
+        For i = 0 To Rides
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
@@ -64,7 +64,7 @@
         Dim Counterj As Integer = 0
         Dim CounterNums As Integer = 0
         Dim RideNo As Integer = 0
-        fileReader = New IO.StreamReader("a_example.in")
+        fileReader = New IO.StreamReader("b_should_be_easy.in")
         fileReader.ReadLine()
         Do While fileReader.EndOfStream = False
             FileLine = fileReader.ReadLine()
@@ -89,24 +89,27 @@
         Loop
 
     End Sub
+<<<<<<< HEAD
 
     Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer(,)
         Dim RidesArr(99, 2) As Integer
+=======
+    Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer()
+        Dim RidesArr(Vehicles) As Integer
+>>>>>>> 0632c9d4e342ddd9108464365ae1d46f42ee876d
         ' FirstLine number of close rides
 
 
         Dim rideCounter = 0
-        For i = 1 To Rides - 1
+        For i = 1 To Rides
             If DataIN(i, 0) >= SearchAtrributex - PlusMinus And DataIN(i, 0) <= SearchAtrributex + PlusMinus And DataIN(i, 7) = 0 Then
                 If DataIN(i, 1) >= SearchAtrributey - PlusMinus And DataIN(i, 1) <= SearchAtrributey + PlusMinus And DataIN(i, 7) = 0 Then
-                    RidesArr(rideCounter, 0) = DataIN(i, 0)
-                    RidesArr(rideCounter, 1) = DataIN(i, 1)
-                    RidesArr(rideCounter, 2) = DataIN(i, 4)
+                    RidesArr(rideCounter) = DataIN(i, 6)
                     rideCounter = rideCounter + 1
                 End If
             End If
         Next
-
+        RidesArr(0) = rideCounter
 
         RidesAvailable = RidesArr
     End Function
