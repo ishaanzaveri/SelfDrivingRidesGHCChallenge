@@ -1,5 +1,6 @@
 ﻿Module Module1
     'rayhaan is in
+    'stark is in
     'Function RidesAvailble (cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
     'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
     'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
@@ -23,12 +24,38 @@
             Console.WriteLine()
         Next
         Console.ReadLine()
+        SortedbyES()
+        Console.ReadLine()
     End Sub
+
+    Sub SortedbyES()
+        Dim temp As String ' array
+        Dim x As Integer
+        Dim sorted(Rides, 7)
+
+        For i = 0 To (Rides - 2)
+            If DataIN(i, 4) > DataIN(i + 1, 4) Then
+                For x = 0 To 7
+                    temp = DataIN(i, x)
+                    DataIN(i, x) = DataIN(i + 1, x)
+                    DataIN(i + 1, x) = temp
+                Next
+            End If
+        Next
+        For i = 0 To (Rides - 1)
+            For j = 0 To 7
+                Console.Write(DataIN(i, j) & " ")
+            Next
+            Console.WriteLine()
+        Next
+    End Sub
+
     Function Distance(ByVal cordx1 As Integer, ByVal cordy1 As Integer, ByVal cordx2 As Integer, ByVal cordy2 As Integer) As Integer
         Dim Dis As Integer = 0
         Dis = Math.Abs(cordx1 - cordx2) + Math.Abs(cordy1 - cordy2)
         Return Dis
     End Function
+
     Sub FileReading()
         Dim FileLine As String = ""
         Dim fileReader As IO.StreamReader
@@ -62,6 +89,7 @@
         Loop
 
     End Sub
+
     Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer(,)
         Dim RidesArr(99, 2) As Integer
         ' FirstLine number of close rides
