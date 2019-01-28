@@ -7,7 +7,7 @@
         Dim EarliestEarlyStart = 999999999999999
         Dim LatestLateFinish = 0
 
-        fileReader = New IO.StreamReader("d_metropolis.in")
+        fileReader = New IO.StreamReader("e_high_bonus.in")
 
         DataLine = ReadingAndStoring()
         Console.WriteLine("Rows: " & DataLine(0) & " Cols: " & DataLine(1) & " Vehicles: " & DataLine(2) & " Rides: " & DataLine(3) & " Bonus: " & DataLine(4) & " Steps: " & DataLine(5))
