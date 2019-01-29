@@ -26,8 +26,8 @@
             Console.WriteLine()
         Next
         Console.ReadLine()
-        SortedbyES()
-        Console.ReadLine()
+        'SortedbyES()
+        'Console.ReadLine()
         For T = 1 To Steps
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
             Decision(RidesArr)
@@ -113,6 +113,7 @@
     End Function
 
     Sub Decision(ByVal RidesArr)
+        Dim add As Integer = 0
         Dim cordx As Integer = 0
         Dim cordy As Integer = 0
         Dim Dist As Integer = 0
@@ -122,9 +123,14 @@
         Dim iterations As Integer = 0
         Dim counter1 As Integer = 0
         Dim counter2 As Integer = 0
+        Dim counter3 As Integer = 1
         Dim updatex As Integer = 0
         Dim updatey As Integer = 0
         Dim RideNum As Integer = 0
+        Dim temp_len As Integer = 0
+        Dim preserve As String = ""
+        Dim write As String = ""
+        Dim concat As String = ""
         Dim temp As String = ""
         Dim WriteToFile As String = ""
         Dim FileWriter As IO.StreamWriter
@@ -154,11 +160,21 @@
                 FileReader.ReadLine()
             Next
             temp = CStr(FileReader.ReadLine())
+            temp_len = Len(temp)
+            Do While Mid(temp, counter3, 1) <> " "
+                concat = concat & Mid(temp, counter3, 1)
+                counter3 = counter3 + 1
+            Loop
+            preserve = Right(temp, temp_len - counter3)
+            add = CInt(concat)
+            add = add + 1
+            write = CStr(add)
+            temp = write & preserve
             FileReader.Close()
             'Incomplete code for writing to file below. Need to figure out how to write to a specific line
             'FileWriter = New IO.StreamWriter("output_file.txt")
             'WriteToFile = temp & ", " & RideNum
-            'FileWriter.WriteLine(CInt(WriteToFile))
+            'FileWriter.WriteLine(WriteToFile)
             'FileWriter.Close()
             CurrentPos(counter, 0) = 0
             CurrentPos(counter, 0) = updatex
