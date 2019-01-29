@@ -19,14 +19,17 @@
 
     Sub Main()
         FileReading()
-        For i = 0 To Rides
+        For i = 0 To (Rides - 1)
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
             Console.WriteLine()
         Next
+        Console.WriteLine()
+        Console.WriteLine("Sorted by ES:")
         Console.ReadLine()
         SortedbyES()
+        Console.WriteLine()
         Console.ReadLine()
         For T = 1 To Steps
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
