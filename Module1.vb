@@ -1,6 +1,7 @@
 ﻿Module Module1
     'rayhaan is in
     'stark is in
+    'Zaveri is up and in 
     'Function RidesAvailble (cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
     'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
     'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
