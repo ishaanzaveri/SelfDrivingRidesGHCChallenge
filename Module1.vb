@@ -28,14 +28,11 @@
         Console.WriteLine()
         Console.WriteLine("Sorted by ES:")
         Console.ReadLine()
-<<<<<<< HEAD
         'SortedbyES()
         'Console.ReadLine()
-=======
         SortedbyES()
         Console.WriteLine()
         Console.ReadLine()
->>>>>>> 1023693584221767049d2ccc6aeef232c466e36f
         For T = 1 To Steps
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
             Decision(RidesArr)
