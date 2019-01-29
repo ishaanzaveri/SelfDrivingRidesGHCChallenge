@@ -34,14 +34,17 @@
         SortedbyES()
         Console.WriteLine()
         Console.ReadLine()
-        For T = 1 To Steps
+        For T = 1 To Steps 'Are you trying to run the simulation ? it unnessisary i think -Ishaan
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
-            Decision(RidesArr)
+            Decision()
+            'If T Mod 10 = 0 Then
+            Console.Write(T)
+           ' End If
         Next
     End Sub
 
-    Sub SortedbyES()
-        Dim temp As String ' array
+    Sub SortedbyES() ' Ishaan - I feel Like sorted ES Does'nt work
+        Dim temp As Integer ' changed temp to Integer as you were storing strings in the array 
         Dim x As Integer
         Dim sorted(Rides, 7)
 
@@ -102,7 +105,7 @@
     End Sub
 
     Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer()
-        Dim RidesArr(Vehicles) As Integer
+        Dim RidesArr(Rides) As Integer ' Maximum number of rides passed can be all rides
         ' FirstLine number of close rides
         Dim rideCounter = 0
         For i = 1 To Rides
@@ -118,7 +121,7 @@
         RidesAvailable = RidesArr
     End Function
 
-    Sub Decision(ByVal RidesArr)
+    Sub Decision() ' RidesArr is a global variable it doesn't need to be passed.
         Dim add As Integer = 0
         Dim cordx As Integer = 0
         Dim cordy As Integer = 0
@@ -169,7 +172,7 @@
             temp_len = Len(temp)
             Do While Mid(temp, counter3, 1) <> " "
                 concat = concat & Mid(temp, counter3, 1)
-                counter3 = counter3 + 1
+                counter3 = counter3 + 1 'Overflow meaning couter 3 becomes too big for computer to handle 
             Loop
             preserve = Right(temp, temp_len - counter3)
             add = CInt(concat)
