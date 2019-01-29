@@ -5,7 +5,7 @@
     'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
     'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
     Dim rows As Integer = 799
-    Dim Cols As Integer = 997
+    Dim Cols As Integer = 999
     Dim Vehicles As Integer = 100
     Dim Rides As Integer = 299
     Dim Bonuses As Integer = 25
@@ -19,15 +19,23 @@
 
     Sub Main()
         FileReading()
-        For i = 0 To Rides
+        For i = 0 To (Rides)
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
             Console.WriteLine()
         Next
+        Console.WriteLine()
+        Console.WriteLine("Sorted by ES:")
         Console.ReadLine()
+<<<<<<< HEAD
         'SortedbyES()
         'Console.ReadLine()
+=======
+        SortedbyES()
+        Console.WriteLine()
+        Console.ReadLine()
+>>>>>>> 1023693584221767049d2ccc6aeef232c466e36f
         For T = 1 To Steps
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
             Decision(RidesArr)
@@ -39,7 +47,7 @@
         Dim x As Integer
         Dim sorted(Rides, 7)
 
-        For i = 0 To (Rides - 2)
+        For i = 0 To (Rides - 1)
             If DataIN(i, 4) > DataIN(i + 1, 4) Then
                 For x = 0 To 7
                     temp = DataIN(i, x)
@@ -48,7 +56,7 @@
                 Next
             End If
         Next
-        For i = 0 To (Rides - 1)
+        For i = 0 To Rides
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
