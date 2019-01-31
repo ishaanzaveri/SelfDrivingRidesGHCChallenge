@@ -108,7 +108,7 @@
 
     End Sub
 
-    Function RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer) As Integer()
+    Sub RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer)
         Dim RidesArr(Rides) As Integer ' Maximum number of rides passed can be all rides
         ' FirstLine number of close rides
         Dim rideCounter = 0
@@ -121,9 +121,7 @@
             End If
         Next
         RidesArr(0) = rideCounter
-
-        RidesAvailable = RidesArr
-    End Function
+    End Sub
 
     Sub Decision() ' RidesArr is a global variable it doesn't need to be passed.
         Dim add As Integer = 0
