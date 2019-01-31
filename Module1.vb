@@ -1,10 +1,12 @@
 ﻿Module Module1
     'rayhaan is in
     'stark is in
-    'Zaveri is up and in 
+    'Zaveri in 
     'Function RidesAvailble (cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
     'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
     'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
+
+    'Global variables
     Dim rows As Integer = 799
     Dim Cols As Integer = 999
     Dim Vehicles As Integer = 100
@@ -12,15 +14,15 @@
     Dim Bonuses As Integer = 25
     Dim Steps As Integer = 25000
     Dim DataIN(Rides, 7) As Integer
-    Dim DataCar(Rides, 1000) As Integer
+    Dim DataCar(Vehicles, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
     Dim T As Integer = 0
     Dim RidesArr(99) As Integer
     Dim CurrentPos(Vehicles - 1, 1) As Integer
 
     Sub Main()
-        FileReading()
-        For i = 0 To (Rides)
+        FileReading() ' Inputting all the data into DataIN
+        For i = 0 To (Rides) ' outputting DataIN
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
@@ -30,12 +32,13 @@
 
         Console.WriteLine("Sorted by ES:")
         Console.ReadLine()
+
         SortedbyES()
 
         Console.WriteLine()
         Console.ReadLine()
 
-        For T = 1 To Steps 'Are you trying to run the simulation ? it unnessisary i think -Ishaan
+        For T = 1 To Steps
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
             Decision()
             'If T Mod 10 = 0 Then
@@ -145,21 +148,21 @@
         Dim concat As String = ""
         Dim temp As String = ""
         Dim WriteToFile As String = ""
-        Dim FileWriter As IO.StreamWriter
-        Dim FileReader As IO.StreamReader
+        'Dim FileWriter As IO.StreamWriter
+        'Dim FileReader As IO.StreamReader
         LeastDist = 1000000
         LeastWait = 1000000
         For counter = 0 To (Vehicles - 1)
             cordx = CurrentPos(counter, 0)
             cordy = CurrentPos(counter, 1)
-            RidesAvailable(cordx, cordy)
-            iterations = RidesArr(0)
+            RidesAvailable(cordx, cordy) ' change RideAvailable to a Sub 
+            iterations = RidesArr(0) ' based on potential rides 
             LeastDist = 1000000
             LeastWait = 1000000
-            For counter1 = 1 To iterations
+            For counter1 = 1 To iterations ' counter1 runs through every potential ride
                 Dist = Distance(cordx, cordy, RideSearchx(RidesArr(counter1)), RideSearchy(RidesArr(counter1)))
-                Waiting = T - Check_E_Start(RidesArr(counter1))
-                If (Dist < LeastDist) And (Waiting < LeastWait) Then
+                Waiting = T - Check_E_Start(RidesArr(counter1)) ' UpdateT sub 
+                If (Dist < LeastDist) And (Waiting < LeastWait) Then '
                     updatex = RideSearchx(RidesArr(counter1))
                     updatey = RideSearchy(RidesArr(counter1))
                     LeastDist = Dist
@@ -167,30 +170,29 @@
                     RideNum = RidesArr(counter1)
                 End If
             Next
-            FileReader = New IO.StreamReader("output_file.txt")
-            For counter2 = 1 To counter
-                FileReader.ReadLine()
-            Next
-            temp = CStr(FileReader.ReadLine())
-            temp_len = Len(temp)
-            Do While Mid(temp, counter3, 1) <> " "
-                concat = concat & Mid(temp, counter3, 1)
-                counter3 = counter3 + 1 'Overflow meaning couter 3 becomes too big for computer to handle 
-            Loop
-            preserve = Right(temp, temp_len - counter3)
-            add = CInt(concat)
-            add = add + 1
-            write = CStr(add)
-            temp = write & preserve
-            FileReader.Close()
+            DataCar(counter, 0) = DataCar(counter, 0) + 1
+            'FileReader = New IO.StreamReader("output_file.txt")
+            'For counter2 = 1 To counter
+            'FileReader.ReadLine()
+            'Next
+            'temp = CStr(FileReader.ReadLine())
+            'temp_len = Len(temp)
+            'Do While Mid(temp, counter3, 1) <> " "
+            'concat = concat & Mid(temp, counter3, 1)
+            'counter3 = counter3 + 1 'Overflow meaning couter 3 becomes too big for computer to handle 
+            'Loop
+            'preserve = Right(temp, temp_len - counter3)
+            'add = CInt(concat)
+            'add = add + 1
+            'write = CStr(add)
+            'temp = write & preserve
+            'FileReader.Close()
             'Incomplete code for writing to file below. Need to figure out how to write to a specific line
             'FileWriter = New IO.StreamWriter("output_file.txt")
             'WriteToFile = temp & ", " & RideNum
             'FileWriter.WriteLine(WriteToFile)
             'FileWriter.Close()
-            CurrentPos(counter, 0) = 0
             CurrentPos(counter, 0) = updatex
-            CurrentPos(counter, 1) = 0
             CurrentPos(counter, 1) = updatey
             Dist = 0
             Waiting = 0
@@ -199,18 +201,18 @@
             cordy = 0
             updatex = 0
             updatey = 0
-            temp = ""
-            WriteToFile = ""
+            'temp = ""
+            'WriteToFile = ""
         Next
     End Sub
-
+    Sub updateT(ByRef StepsUsedbycar)
+        T = T + StepsUsedbycar
+    End Sub
     Function RideSearchx(ByVal RideNumber As Integer) As Integer
-        Dim length As Integer = 0
         Dim cordx As Integer = 0
         Dim scan_array As Integer = 0
-        length = DataIN(0, 3)
         'Can change to While Loop to make more efficient
-        For scan_array = 1 To length
+        For scan_array = 0 To Rides
             If DataIN(scan_array, 6) = RideNumber Then
                 cordx = DataIN(scan_array, 2)
             End If
@@ -219,12 +221,10 @@
     End Function
 
     Function RideSearchy(ByVal RideNumber As Integer) As Integer
-        Dim length As Integer = 0
         Dim cordy As Integer = 0
         Dim scan_array As Integer = 0
-        length = DataIN(0, 3)
         'Can change to While Loop to make more efficient
-        For scan_array = 1 To length
+        For scan_array = 0 To Rides
             If DataIN(scan_array, 6) = RideNumber Then
                 cordy = DataIN(scan_array, 3)
             End If
@@ -233,12 +233,10 @@
     End Function
 
     Function Check_E_Start(ByVal RideNumber As Integer) As Integer
-        Dim length As Integer = 0
         Dim e_start As Integer = 0
         Dim scan_array As Integer = 0
-        length = DataIN(0, 3)
         'Can change to While Loop to make more efficient
-        For scan_array = 1 To length
+        For scan_array = 0 To Rides
             If DataIN(scan_array, 6) = RideNumber Then
                 e_start = DataIN(scan_array, 4)
             End If
