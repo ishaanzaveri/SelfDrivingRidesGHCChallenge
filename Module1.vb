@@ -40,23 +40,25 @@
             Decision()
             'If T Mod 10 = 0 Then
             Console.Write(T)
-           ' End If
+            ' End If
         Next
     End Sub
 
     Sub SortedbyES() ' Ishaan - I feel Like sorted ES Does'nt work
         Dim temp As Integer ' changed temp to Integer as you were storing strings in the array 
-        Dim x As Integer
+        Dim x, j As Integer
         Dim sorted(Rides, 7)
 
-        For i = 0 To (Rides - 1)
-            If DataIN(i, 4) > DataIN(i + 1, 4) Then
-                For x = 0 To 7
-                    temp = DataIN(i, x)
-                    DataIN(i, x) = DataIN(i + 1, x)
-                    DataIN(i + 1, x) = temp
-                Next
-            End If
+        For j = 0 To (Rides - 1)
+            For i = 0 To (Rides - j)
+                If DataIN(i, 4) > DataIN(i + 1, 4) Then
+                    For x = 0 To 7
+                        temp = DataIN(i, x)
+                        DataIN(i, x) = DataIN(i + 1, x)
+                        DataIN(i + 1, x) = temp
+                    Next
+                End If
+            Next
         Next
         For i = 0 To Rides
             For j = 0 To 7
@@ -245,3 +247,4 @@
     End Function
 
 End Module
+
