@@ -14,7 +14,7 @@
     Dim Bonuses As Integer = 25
     Dim Steps As Integer = 25000
     Dim DataIN(Rides, 7) As Integer
-    Dim DataCar(Rides, 1000) As Integer
+    Dim DataCar(Vehicles, 1000) As Integer
     Dim PlusMinus As Integer = (rows * Cols) * 0.15
     Dim T As Integer = 0
     Dim RidesArr(99) As Integer
@@ -154,7 +154,7 @@
             cordx = CurrentPos(counter, 0)
             cordy = CurrentPos(counter, 1)
             RidesAvailable(cordx, cordy) ' change RideAvailable to a Sub 
-            iterations = RidesArr(0) ' based on potentil rides 
+            iterations = RidesArr(0) ' based on potential rides 
             LeastDist = 1000000
             LeastWait = 1000000
             For counter1 = 1 To iterations ' counter1 runs through every potential ride
@@ -168,6 +168,7 @@
                     RideNum = RidesArr(counter1)
                 End If
             Next
+            DataCar(counter, 0) = DataCar(counter, 0) + 1
             'FileReader = New IO.StreamReader("output_file.txt")
             'For counter2 = 1 To counter
             'FileReader.ReadLine()
