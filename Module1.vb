@@ -38,7 +38,7 @@
         Console.WriteLine()
         Console.ReadLine()
 
-        For T = 1 To Steps 'Are you trying to run the simulation ? it unnessisary i think -Ishaan
+        For T = 1 To Steps
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
             Decision()
             'If T Mod 10 = 0 Then
@@ -203,7 +203,9 @@
             'WriteToFile = ""
         Next
     End Sub
-
+    Sub updateT(ByRef StepsUsedbycar)
+        T = T + StepsUsedbycar
+    End Sub
     Function RideSearchx(ByVal RideNumber As Integer) As Integer
         Dim cordx As Integer = 0
         Dim scan_array As Integer = 0
