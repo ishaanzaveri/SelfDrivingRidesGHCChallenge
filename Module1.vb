@@ -29,19 +29,21 @@
             Console.WriteLine()
         Next
         Console.WriteLine()
+
         Console.WriteLine("Sorted by ES:")
         Console.ReadLine()
-        'SortedbyES()
-        'Console.ReadLine()
-        SortedbyES() ' Bubble sort by Earliest Start
+
+        SortedbyES()
+
         Console.WriteLine()
         Console.ReadLine()
+
         For T = 1 To Steps 'Are you trying to run the simulation ? it unnessisary i think -Ishaan
             'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
             Decision()
             'If T Mod 10 = 0 Then
             Console.Write(T)
-           ' End If
+            ' End If
         Next
     End Sub
 
