@@ -1,7 +1,7 @@
 ﻿Module Module1
     'rayhaan is in
     'stark is in
-    'Zaveri in 
+    'Zaveri is in 
     'Function RidesAvailble (cordx, cordy) where cordx and cordy are the current x and y coordinates of each car
     'Above function should return array RidesAvailable() where each column shows: x coordinate of ride start, y coordinate of ride start, earliest start
     'When adding data to array RidesAvailable(), don't include rides which are already taken (ie: last column of DataIN() has the value 1)
@@ -22,48 +22,25 @@
 
     Sub Main()
         Console.WriteLine()
-        Console.WriteLine("Sorted by ES:")
-        Console.ReadLine()
-        FileReading() ' Inputting all the data into DataIN
+        FileReading()
         outputingDataIn()
+        'Console.WriteLine("Sorted by ES:")
+        'Console.ReadLine()
+        'FileReading() ' Inputting all the data into DataIN
+        'outputingDataIn()
 
-        SortedbyES()
-        Console.WriteLine()
-        Console.ReadLine()
 
-        For T = 1 To Steps
-            'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
-            Decision()
-            'If T Mod 10 = 0 Then
-            Console.Write(T)
-            ' End If
-        Next
+
+        '  For T = 1 To Steps
+        'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
+        Decision()
+        'If T Mod 10 = 0 Then
+        ' Console.Write(T)
+        ' End If
+        'Next
     End Sub
     Sub outputingDataIn()
         For i = 0 To (Rides) ' outputting DataIN
-            For j = 0 To 7
-                Console.Write(DataIN(i, j) & " ")
-            Next
-            Console.WriteLine()
-        Next
-    End Sub
-    Sub SortedbyES() ' Ishaan - I feel Like sorted ES Does'nt work
-        Dim temp As Integer ' changed temp to Integer as you were storing strings in the array 
-        Dim x, j As Integer
-        Dim sorted(Rides, 7)
-
-        For j = 0 To (Rides - 1)
-            For i = 0 To (Rides - j)
-                If DataIN(i, 4) > DataIN(i + 1, 4) Then
-                    For x = 0 To 7
-                        temp = DataIN(i, x)
-                        DataIN(i, x) = DataIN(i + 1, x)
-                        DataIN(i + 1, x) = temp
-                    Next
-                End If
-            Next
-        Next
-        For i = 0 To Rides
             For j = 0 To 7
                 Console.Write(DataIN(i, j) & " ")
             Next
@@ -145,8 +122,8 @@
         For counter = 0 To (Vehicles - 1)
             cordx = CurrentPos(counter, 0)
             cordy = CurrentPos(counter, 1)
-            RidesAvailable(cordx, cordy) ' change RideAvailable to a Sub 
-            iterations = RidesArr(0) ' based on potential rides 
+            RidesAvailable(cordx, cordy)
+            iterations = RidesArr(0)
             LeastDist = 1000000
             LeastWait = 1000000
             For counter1 = 1 To iterations ' counter1 runs through every potential ride
@@ -212,4 +189,3 @@
     End Function
 
 End Module
-
