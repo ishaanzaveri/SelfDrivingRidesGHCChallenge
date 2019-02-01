@@ -21,23 +21,10 @@
     Dim CurrentPos(Vehicles - 1, 1) As Integer
 
     Sub Main()
-        Console.WriteLine()
         FileReading()
         outputingDataIn()
-        'Console.WriteLine("Sorted by ES:")
-        'Console.ReadLine()
-        'FileReading() ' Inputting all the data into DataIN
-        'outputingDataIn()
-
-
-
-        '  For T = 1 To Steps
-        'Don't know what will happen in the first iteration of this loop since RidesArr() will be blank
         Decision()
-        'If T Mod 10 = 0 Then
-        ' Console.Write(T)
-        ' End If
-        'Next
+        Console.ReadLine()
     End Sub
     Sub outputingDataIn()
         For i = 0 To (Rides) ' outputting DataIN
