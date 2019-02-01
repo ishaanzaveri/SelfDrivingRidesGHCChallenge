@@ -14,17 +14,26 @@
     Dim Bonuses As Integer = 25
     Dim Steps As Integer = 25000
     Dim DataIN(Rides, 7) As Integer
-    Dim DataCar(Vehicles, 1000) As Integer
-    Dim PlusMinus As Integer = (rows * Cols) * 0.15
+    Dim DataCar(Vehicles, 2) As Integer
+    Dim PlusMinus As Integer = 500
     Dim T As Integer = 0
-    Dim RidesArr(99) As Integer
+    Dim RidesArr(Rides) As Integer
     Dim CurrentPos(Vehicles - 1, 1) As Integer
 
     Sub Main()
         FileReading()
         outputingDataIn()
         Decision()
+        outputingDataCar()
         Console.ReadLine()
+    End Sub
+    Sub outputingDataCar()
+        For i = 0 To Vehicles - 1
+            For j = 0 To 2
+                Console.Write(DataCar(i, j) & " ")
+            Next
+            Console.WriteLine()
+        Next
     End Sub
     Sub outputingDataIn()
         For i = 0 To (Rides) ' outputting DataIN
@@ -75,9 +84,9 @@
     End Sub
 
     Sub RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer)
-        Dim RidesArr(Rides) As Integer ' Maximum number of rides passed can be all rides
+        ' Dim RidesArr(Rides) As Integer ' Maximum number of rides passed can be all rides
         ' FirstLine number of close rides
-        Dim rideCounter = 0
+        Dim rideCounter = 1
         For i = 1 To Rides
             If DataIN(i, 0) >= SearchAtrributex - PlusMinus And DataIN(i, 0) <= SearchAtrributex + PlusMinus And DataIN(i, 7) = 0 Then
                 If DataIN(i, 1) >= SearchAtrributey - PlusMinus And DataIN(i, 1) <= SearchAtrributey + PlusMinus And DataIN(i, 7) = 0 Then
@@ -90,6 +99,7 @@
     End Sub
 
     Sub Decision() ' RidesArr is a global variable it doesn't need to be passed.
+        'Console.WriteLine("In Desicion")
         Dim add As Integer = 0
         Dim cordx As Integer = 0
         Dim cordy As Integer = 0
@@ -97,44 +107,55 @@
         Dim LeastDist As Integer = 0
         Dim Waiting As Integer = 0
         Dim LeastWait As Integer = 0
-        Dim iterations As Integer = 0
         Dim counter1 As Integer = 0
         Dim counter2 As Integer = 0
         Dim counter3 As Integer = 1
         Dim updatex As Integer = 0
         Dim updatey As Integer = 0
         Dim RideNum As Integer = 0
+        Dim iterations As Integer = 0
         LeastDist = 1000000
         LeastWait = 1000000
         For counter = 0 To (Vehicles - 1)
-            cordx = CurrentPos(counter, 0)
-            cordy = CurrentPos(counter, 1)
-            RidesAvailable(cordx, cordy)
-            iterations = RidesArr(0)
-            LeastDist = 1000000
-            LeastWait = 1000000
-            For counter1 = 1 To iterations ' counter1 runs through every potential ride
-                Dist = Distance(cordx, cordy, RideSearchx(RidesArr(counter1)), RideSearchy(RidesArr(counter1)))
-                Waiting = T - Check_E_Start(RidesArr(counter1)) ' UpdateT sub 
-                If (Dist < LeastDist) And (Waiting < LeastWait) Then
-                    updatex = RideSearchx(RidesArr(counter1))
-                    updatey = RideSearchy(RidesArr(counter1))
-                    LeastDist = Dist
-                    LeastWait = Waiting
-                    RideNum = RidesArr(counter1)
+            T = 0
+            For VehicleRides = 0 To 2
+                If counter = 0 Then
+                    cordx = 0
+                    cordy = 0
+                Else
+                    cordx = CurrentPos(counter, 0)
+                    cordy = CurrentPos(counter, 1)
                 End If
+                RidesAvailable(cordx, cordy)
+                iterations = RidesArr(0)
+                LeastDist = 1000000
+                LeastWait = 1000000
+                For counter1 = 1 To iterations ' counter1 runs through every potential ride
+                    Dist = Distance(cordx, cordy, RideSearchx(RidesArr(counter1)), RideSearchy(RidesArr(counter1)))
+                    Waiting = T - Check_E_Start(RidesArr(counter1)) ' UpdateT sub 
+                    If (Dist < LeastDist) And (Waiting < LeastWait) Then
+                        updatex = RideSearchx(RidesArr(counter1))
+                        updatey = RideSearchy(RidesArr(counter1))
+                        LeastDist = Dist
+                        LeastWait = Waiting
+                        RideNum = RidesArr(counter1)
+                        Console.WriteLine(RideNum)
+                    End If
+                Next
+                updateT(Dist)
+                DataIN(RideNum, 7) = 1
+                DataCar(counter, VehicleRides) = RideNum
+                CurrentPos(counter, 0) = updatex
+                CurrentPos(counter, 1) = updatey
             Next
-            DataCar(counter, 0) = DataCar(counter, 0) + 1
-            CurrentPos(counter, 0) = updatex
-            CurrentPos(counter, 1) = updatey
             Dist = 0
-            Waiting = 0
-            RideNum = 0
-            cordx = 0
-            cordy = 0
-            updatex = 0
-            updatey = 0
-        Next
+                Waiting = 0
+                RideNum = 0
+                cordx = 0
+                cordy = 0
+                updatex = 0
+                updatey = 0
+            Next
     End Sub
     Sub updateT(ByRef StepsUsedbycar)
         T = T + StepsUsedbycar
