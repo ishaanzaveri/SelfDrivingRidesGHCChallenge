@@ -21,20 +21,13 @@
     Dim CurrentPos(Vehicles - 1, 1) As Integer
 
     Sub Main()
-        FileReading() ' Inputting all the data into DataIN
-        For i = 0 To (Rides) ' outputting DataIN
-            For j = 0 To 7
-                Console.Write(DataIN(i, j) & " ")
-            Next
-            Console.WriteLine()
-        Next
         Console.WriteLine()
-
         Console.WriteLine("Sorted by ES:")
         Console.ReadLine()
+        FileReading() ' Inputting all the data into DataIN
+        outputingDataIn()
 
         SortedbyES()
-
         Console.WriteLine()
         Console.ReadLine()
 
@@ -46,7 +39,14 @@
             ' End If
         Next
     End Sub
-
+    Sub outputingDataIn()
+        For i = 0 To (Rides) ' outputting DataIN
+            For j = 0 To 7
+                Console.Write(DataIN(i, j) & " ")
+            Next
+            Console.WriteLine()
+        Next
+    End Sub
     Sub SortedbyES() ' Ishaan - I feel Like sorted ES Does'nt work
         Dim temp As Integer ' changed temp to Integer as you were storing strings in the array 
         Dim x As Integer
@@ -140,14 +140,6 @@
         Dim updatex As Integer = 0
         Dim updatey As Integer = 0
         Dim RideNum As Integer = 0
-        Dim temp_len As Integer = 0
-        Dim preserve As String = ""
-        Dim write As String = ""
-        Dim concat As String = ""
-        Dim temp As String = ""
-        Dim WriteToFile As String = ""
-        'Dim FileWriter As IO.StreamWriter
-        'Dim FileReader As IO.StreamReader
         LeastDist = 1000000
         LeastWait = 1000000
         For counter = 0 To (Vehicles - 1)
@@ -160,7 +152,7 @@
             For counter1 = 1 To iterations ' counter1 runs through every potential ride
                 Dist = Distance(cordx, cordy, RideSearchx(RidesArr(counter1)), RideSearchy(RidesArr(counter1)))
                 Waiting = T - Check_E_Start(RidesArr(counter1)) ' UpdateT sub 
-                If (Dist < LeastDist) And (Waiting < LeastWait) Then '
+                If (Dist < LeastDist) And (Waiting < LeastWait) Then
                     updatex = RideSearchx(RidesArr(counter1))
                     updatey = RideSearchy(RidesArr(counter1))
                     LeastDist = Dist
@@ -169,27 +161,6 @@
                 End If
             Next
             DataCar(counter, 0) = DataCar(counter, 0) + 1
-            'FileReader = New IO.StreamReader("output_file.txt")
-            'For counter2 = 1 To counter
-            'FileReader.ReadLine()
-            'Next
-            'temp = CStr(FileReader.ReadLine())
-            'temp_len = Len(temp)
-            'Do While Mid(temp, counter3, 1) <> " "
-            'concat = concat & Mid(temp, counter3, 1)
-            'counter3 = counter3 + 1 'Overflow meaning couter 3 becomes too big for computer to handle 
-            'Loop
-            'preserve = Right(temp, temp_len - counter3)
-            'add = CInt(concat)
-            'add = add + 1
-            'write = CStr(add)
-            'temp = write & preserve
-            'FileReader.Close()
-            'Incomplete code for writing to file below. Need to figure out how to write to a specific line
-            'FileWriter = New IO.StreamWriter("output_file.txt")
-            'WriteToFile = temp & ", " & RideNum
-            'FileWriter.WriteLine(WriteToFile)
-            'FileWriter.Close()
             CurrentPos(counter, 0) = updatex
             CurrentPos(counter, 1) = updatey
             Dist = 0
@@ -199,8 +170,6 @@
             cordy = 0
             updatex = 0
             updatey = 0
-            'temp = ""
-            'WriteToFile = ""
         Next
     End Sub
     Sub updateT(ByRef StepsUsedbycar)
