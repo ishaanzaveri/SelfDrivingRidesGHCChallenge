@@ -25,6 +25,7 @@
         outputingDataIn()
         Decision()
         outputingDataCar()
+        FileWriting()
         Console.ReadLine()
     End Sub
     Sub outputingDataCar()
@@ -34,6 +35,17 @@
             Next
             Console.WriteLine()
         Next
+    End Sub
+    Sub FileWriting()
+        Dim fileWriter As IO.StreamWriter
+        fileWriter = New IO.StreamWriter("b_should_be_easy.out")
+        For i = 0 To Vehicles - 1
+            For j = 0 To 2
+                fileWriter.Write(DataCar(i, j) & " ")
+            Next
+            fileWriter.WriteLine()
+        Next
+        fileWriter.Close()
     End Sub
     Sub outputingDataIn()
         For i = 0 To (Rides) ' outputting DataIN
@@ -80,7 +92,7 @@
             DataIN(Counterj, 6) = Counterj
             Counterj = Counterj + 1
         Loop
-
+        fileReader.Close()
     End Sub
 
     Sub RidesAvailable(ByVal SearchAtrributex As Integer, ByVal SearchAtrributey As Integer)
